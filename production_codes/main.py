@@ -5,7 +5,7 @@ import os
 
 
 # read csv from a parent directory
-input_data = pd.read_csv(os.path.join(os.getcwd(), '.', 'data','input_data.csv'))
+input_data = pd.read_csv(os.path.join(os.getcwd(), '..', 'data','input_data.csv'))
 
 # input user id
 user_id = input_user_id()
@@ -16,9 +16,15 @@ id_data = input_data['User ID'].tolist()
 # Get fixed data from previous month 
 # if none, enter new fixed data
 if user_id not in id_data:
-    print(f'Welcome User {user_id}!')
-    print('To get started, we need some information \n')
-    fixed_income, fixed_expense, variable_expense, fixed_saving, is_life_insurance, is_medical_insurance = fixed_input(user_id)
+    print(f'Welcome to Marinvest, User {user_id}! \n')
+    print('Marinvest is a financial planning app that will make your financial life easy!')
+    print("All that you have to do is to update your monthly income and and account balances, then we'll take care of the rest! \n")
+    print('To get started, we need to know more about you... \n')
+    print('First, we need to have a rough idea on how much you make and spend.')
+    print('Rough estimates are fine. However more precise information will allow us give more accurate insights \n')
+    print('Initial setup')
+
+    fixed_income, fixed_expense, variable_expense, fixed_saving, is_life_insurance, is_medical_insurance = initial_input(user_id)
 
     # goals (will calculate PMT based on some interest rate)
     ## 1. retirement
@@ -61,7 +67,7 @@ month, year, variable_income, variable_saving, account_balance = variable_input(
 # save new input
 new_input = [user_id,month,year,fixed_income,variable_income,fixed_expense,variable_expense,fixed_saving,variable_saving,account_balance,is_life_insurance,is_medical_insurance]
 updated_input_data = input_data.append(pd.Series(new_input, index = input_data.columns), ignore_index=True).drop_duplicates(subset=['User ID','Month','Year'], keep="last")
-updated_input_data.to_csv(os.path.join(os.getcwd(), '.','data' ,'input_data.csv'), index = False, header=True)
+updated_input_data.to_csv(os.path.join(os.getcwd(), '..','data' ,'input_data.csv'), index = False, header=True)
 
 # create list of stuff needed for dashboard
 # use updated_input_data
