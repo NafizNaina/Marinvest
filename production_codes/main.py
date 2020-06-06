@@ -5,7 +5,7 @@ import os
 
 
 # read csv from a parent directory
-input_data = pd.read_csv(os.path.join(os.getcwd(), '..', 'data','input_data.csv'))
+input_data = pd.read_csv(os.path.join(os.getcwd(), '.', 'data','input_data.csv'))
 
 # input user id
 user_id = input_user_id()
@@ -67,7 +67,7 @@ month, year, variable_income, variable_saving, account_balance = variable_input(
 # save new input
 new_input = [user_id,month,year,fixed_income,variable_income,fixed_expense,variable_expense,fixed_saving,variable_saving,account_balance,is_life_insurance,is_medical_insurance]
 updated_input_data = input_data.append(pd.Series(new_input, index = input_data.columns), ignore_index=True).drop_duplicates(subset=['User ID','Month','Year'], keep="last")
-updated_input_data.to_csv(os.path.join(os.getcwd(), '..','data' ,'input_data.csv'), index = False, header=True)
+updated_input_data.to_csv(os.path.join(os.getcwd(), '.','data' ,'input_data.csv'), index = False, header=True)
 
 # create list of stuff needed for dashboard
 # use updated_input_data
